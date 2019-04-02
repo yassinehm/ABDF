@@ -1,0 +1,101 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: ilyas
+ * Date: 12/01/2019
+ * Time: 19:16
+ */
+ini_set( 'display_errors', '1' );
+
+
+//Premet la création d'un compte
+$contenu = "";
+$title = "";
+ob_start();
+$periode=listeperiode();
+$idconsultant=$_POST["idconsultant"];
+$idprojet=$_POST["idprojet"];
+$detailrojet=get_projet_unique($idprojet);
+$infoprojet=imputationactuelle($idconsultant,$idprojet);
+$NOMPROJET=$detailrojet["NomProjet"];
+
+?>
+
+    <h1><?=$NOMPROJET?></h1>
+<?if ($infoprojet!=null): ?>
+    <table>
+        <tr>
+            <th>Periode</th>
+            <th>Nombre de jours travaillés </th>
+        </tr>
+
+        <?php foreach($infoprojet as $detail) :  ?>
+        <form action='#' method='post'>
+            <?php $detaiperiode = listeperiodeunique($detail["IdPeriode"]); ?>
+            <td>
+                <input type='radio' name='idperiodeactuelle' value='<?= $detail["IdPeriode"] ?>'>
+                <?= $detaiperiode["Mois"], $detaiperiode["Annee"] ?>
+            </td>
+            <td>
+                <input type='number' name='nbjour' value='<?= $detail["NbJours"] ?>'>
+            </td>
+        <?endforeach;?>
+
+
+            <td>
+                <SELECT name="periode" size="1">
+                    <?php foreach ($periode as $item): ?>
+                        <option value='<?= $item["IdPeriode"] ?>'> <?= $item["Mois"] , " " , $item["Annee"] ?></option>
+                    <?php endforeach; ?>
+                </SELECT>
+                <input type="hidden" name="idconsultant" value="<?= $idconsultant ?>">
+                <input type="hidden" name="idprojet" value="<?= $idprojet ?>">
+                <input type="submit" name='modifimputation' value="Modifier">
+            </td>
+        </form>
+    </table>
+    <table>
+        <tr>
+            <td>
+                <form method="post" action="#" >
+                    Nb jour
+                    <input min="0"  value="0" type="number" name="nbjour"/>
+            </td>
+            <td>Periode :
+                <SELECT name="periode" size="1" >
+                    <?php foreach ($periode as $item): ?>
+                        <option value='<?= $item["IdPeriode"] ?>'> <?= $item["Mois"] . " " . $item["Annee"] ?></option>
+                    <?php endforeach; ?>
+                </SELECT>
+                <input type="hidden" name="idconsultant" value="<?=$idconsultant?>">
+                <input type="hidden" name="idprojet" value="<?=$idprojet?>">
+
+                <input type="submit"  name="creation" value="Crée">
+            </td>
+            </form>
+        </tr><tr>
+    </table>
+
+<?endif;?>
+    <?php
+
+        if(isset($_POST['']))
+        {
+            //&& $_POST["nbjour"]!= 0&& isset($_POST["creation"])
+            if(isset($_post['modification'])){
+
+            }
+            else if(isset($_post['creation'])){
+
+            }
+            echo "TESTCREATION";
+            $idperiode=$_POST["periode"];
+            $nbjour=$_POST["nbjour"];
+            ajoutimputation($idperiode,$idprojet,$idconsultant,$nbjour);
+        }
+        else{
+            echo "Nombre de jours incorrect";
+        }
+        $contenu = ob_get_clean();
+        render($contenu,  $title);
+    ?>

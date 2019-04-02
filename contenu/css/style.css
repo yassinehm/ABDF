@@ -1,0 +1,106 @@
+html, body {
+    height: auto;
+    width: 100%;
+    overflow: auto;
+    position: relative;
+    top: 0;
+    padding: 0;
+    margin: auto;
+    min-width: 600px;
+    max-width: 2000px;
+    background-color: #d3cbdb;
+}
+#conteneur {
+    margin : auto;
+    width : 800px;
+}
+main {
+    background-color:  rgb(228, 229, 230);
+    left: 50%;
+    transform: translateX(-50%);
+    position: relative;
+    width: auto;
+}
+
+header {
+    display: block;
+    text-align: center;
+    width: 100%;
+    height: 5%;
+    position: relative;
+    border-bottom: solid 2px gray;
+}
+header h2{
+    top: 50%;
+    transform: translateY(-50%);
+    display: block;
+    position: relative;
+    margin: auto;
+}
+
+div#contenu {
+
+    text-align: center;
+    float: right;
+    width: 80%;
+    height: 89.8%;
+    position: relative;
+    overflow-y: scroll;
+}
+footer {
+    width: 100%;
+    height: 5%;
+    clear: both;
+    text-align: center;
+}
+nav {
+    text-align: center;
+    float: left;
+    width: calc(20%);
+    height: calc(89.8%);
+}
+
+nav ul {
+    position: relative;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    position: relative;
+    transition: .5s;
+    margin: 0;
+
+
+}
+
+nav ul li:hover {
+    background-color: rgb(187, 183, 183);
+}
+
+nav ul li a {
+    position: relative;
+    display: block;
+    text-decoration: none;
+    width: 100%;
+    padding: 10px 0;
+
+}
+.btn btn-primary {
+    position: relative;
+    margin: 10px;
+}
+.cnx {
+    float: right;
+
+}
+
+img {
+    width: 100%;
+    height: auto;
+}
+
+.image2 {
+    width: 50px;
+}
